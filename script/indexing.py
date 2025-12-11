@@ -5,34 +5,12 @@ from typing import List, Dict, Any
 
 import tiktoken
 from tqdm.auto import tqdm
-from langchain.embeddings.base import Embeddings
 from langchain_community.vectorstores import FAISS
 
-from model import get_embedding, embedding_client
+from model import get_embedding, embedding_client, LCEmbeddings
 from config import CHUNK_SIZE, CHUNK_OVERLAP, EMBED_MODEL
 
 _enc = tiktoken.get_encoding("cl100k_base")
-
-class LCEmbeddings(Embeddings):
-    def embed_documents(self, texts: List[str]) -> List[List[float]]:
-        chunks_per_doc = [chunk_text(t, CHUNK_SIZE, CHUNK_OVERLAP) for t in texts]
-        flat_chunks: List[str] = []
-        counts: List[int] = []
-        for cs in chunks_per_doc:
-            counts.append(len(cs))
-            flat_chunks.extend(cs)
-        flat_embs = embed_texts_batch(flat_chunks, batch_size=16)
-        out: List[List[float]] = []
-        i = 0
-        for c in counts:
-            embs = flat_embs[i:i + c]
-            i += c
-            out.append(aggregate_embeddings(embs))
-        return out
-
-    def embed_query(self, text: str) -> List[float]:
-        return get_embedding(text)
-
 
 def chunk_text(text: str, chunk_size: int, chunk_overlap: int) -> List[str]:
     tokens = _enc.encode(text)

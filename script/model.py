@@ -1,5 +1,6 @@
 from openai import OpenAI
 from typing import List, Dict
+from langchain.embeddings.base import Embeddings
 from config import LLM_API_KEY, LLM_BASE_URL, EMBED_API_KEY, EMBED_BASE_URL, LLM_MODEL, EMBED_MODEL
 
 llm_client = OpenAI(
@@ -29,9 +30,22 @@ def get_embedding(text):
     )
     return response.data[0].embedding
 
-# if __name__ == "__main__":
-#     prompt = "你好"
-#     response = get_response(prompt)
-#     print(response)
-#     embedding = get_embedding(prompt)
-#     print(embedding)
+class LCEmbeddings(Embeddings):
+    def embed_documents(self, texts: List[str]) -> List[List[float]]:
+        chunks_per_doc = [chunk_text(t, CHUNK_SIZE, CHUNK_OVERLAP) for t in texts]
+        flat_chunks: List[str] = []
+        counts: List[int] = []
+        for cs in chunks_per_doc:
+            counts.append(len(cs))
+            flat_chunks.extend(cs)
+        flat_embs = embed_texts_batch(flat_chunks, batch_size=16)
+        out: List[List[float]] = []
+        i = 0
+        for c in counts:
+            embs = flat_embs[i:i + c]
+            i += c
+            out.append(aggregate_embeddings(embs))
+        return out
+
+    def embed_query(self, text: str) -> List[float]:
+        return get_embedding(text)
