@@ -21,6 +21,7 @@ click=8.2.1=py313haa95532_1
 colorama=0.4.6=py313haa95532_0
 dataclasses-json=0.6.7=py313haa95532_0
 distro=1.9.0=py313haa95532_0
+faiss-cpu=1.13.1=pypi_0
 frozenlist=1.8.0=py313h885b0b7_0
 greenlet=3.2.4=py313h885b0b7_0
 h11=0.16.0=py313haa95532_1
@@ -36,6 +37,10 @@ langchain=0.3.27=py313haa95532_0
 langchain-community=0.3.30=py313haa95532_0
 langchain-core=0.3.77=py313haa95532_0
 langchain-text-splitters=0.3.11=py313haa95532_0
+langgraph=1.0.1=py313haa95532_1
+langgraph-checkpoint=3.0.0=py313h4442805_0
+langgraph-prebuilt=1.0.1=py313haa95532_1
+langgraph-sdk=0.2.9=py313haa95532_1
 langsmith=0.4.32=py313haa95532_0
 libexpat=2.7.3=h885b0b7_4
 libffi=3.4.4=hd77b12b_1
@@ -58,6 +63,7 @@ numpy-base=2.3.5=py313h1e017a8_0
 openai=1.109.1=py313haa95532_0
 openssl=3.0.18=h543e019_0
 orjson=3.11.4=py313h114bc41_0
+ormsgpack=1.11.0=py313h114bc41_0
 packaging=25.0=py313haa95532_1
 pip=25.3=pyhc872135_0
 propcache=0.3.1=py313h827c3e9_0
@@ -69,6 +75,7 @@ pydantic-settings=2.12.0=py313haa95532_0
 pysocks=1.7.1=py313haa95532_1
 python=3.13.11=h260b955_100_cp313
 python-dotenv=1.1.0=py313haa95532_0
+python-xxhash=3.5.0=py313h827c3e9_0
 python_abi=3.13=3_cp313
 pyyaml=6.0.3=py313hb9a58be_0
 regex=2025.9.1=py313h02ab6af_0
@@ -97,6 +104,7 @@ vs2015_runtime=14.44.35208=ha6b5a95_10
 wheel=0.45.1=py313haa95532_0
 win_inet_pton=1.1.0=py313haa95532_1
 winloop=0.3.1=py313h913537a_0
+xxhash=0.8.0=h2bbff1b_3
 xz=5.6.4=h4754444_1
 yaml=0.2.5=he774522_0
 yarl=1.22.0=py313h02ab6af_0
